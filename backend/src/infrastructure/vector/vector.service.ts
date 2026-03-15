@@ -24,6 +24,13 @@ export class VectorService{
             documents:[text]
         })
     }
+    async searchSimiliar(embeddings:number[],topK:number=5){
+        const results = await this.collection.query({
+            queryEmbeddings:[embeddings],
+            nResults:topK
+        })
+        return results
+    }
     async getAll() {
         const results = await this.collection.get()
         console.log(results)

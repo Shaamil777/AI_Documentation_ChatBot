@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ChatController } from './chat.controller';
-import { ChatService } from './chat.service';
+import { Module } from '@nestjs/common'
+import { ChatController } from './chat.controller'
+import { RagModule } from '../rag/rag.module'
 
 @Module({
-  controllers: [ChatController],
-  providers: [ChatService]
+  imports: [RagModule],   // ← IMPORTANT
+  controllers: [ChatController]
 })
 export class ChatModule {}

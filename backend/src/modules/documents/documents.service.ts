@@ -17,15 +17,15 @@ export class DocumentsService {
     
         const chunks = this.chunker.splitText(text)
 
-        const embeddigns:number[][] =[]
+        const embeddings:number[][] =[]
 
         for(let i=0;i<chunks.length;i++){
            const chunk = chunks[i]
-           const embeddings = await this.embeddingsService.createEmbedding(chunk)
-           embeddigns.push(embeddings)
+           const embedding = await this.embeddingsService.createEmbedding(chunk)
+           embeddings.push(embedding)
            await this.vectorService.storeEmbeddings(
             `chunk-${i}`,
-            embeddings,
+            embedding,
             chunk
            )
         }
@@ -33,7 +33,7 @@ export class DocumentsService {
         return {
             filename:file.originalname,
             chunks:chunks.length,
-            embeddingsGenerated: embeddigns.length
+            embeddingsGenerated: embeddings.length
         }
     }
 

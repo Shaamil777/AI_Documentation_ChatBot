@@ -26,7 +26,11 @@ export class DocumentsService {
            await this.vectorService.storeEmbeddings(
             `chunk-${i}`,
             embedding,
-            chunk
+            chunk,
+            {
+                document:file.originalname,
+                chunkIndex: i
+            }
            )
         }
     

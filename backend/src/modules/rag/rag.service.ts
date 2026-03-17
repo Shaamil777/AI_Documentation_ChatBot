@@ -14,19 +14,41 @@ export class RagService {
 
     const chunks = await this.retrievalService.retrieveRelevantDocuments(question)
 
-    const context = chunks.join("\n")
+    // handle no results
+    if (!chunks || chunks.length === 0) {
+      return {
+        answer: "I could not find relevant information in the uploaded documents.",
+        sources: []
+      }
+    }
+
+   const context = chunks
+  .slice(0,3)
+  .map((c,i)=>`Source ${i+1}:\n${c.text}`)
+  .join("\n")
 
     const prompt = `
-Answer the question using ONLY the provided context.
+You are an AI assistant answering questions about uploaded documentation.
+
+Use ONLY the provided context to answer the question.
+
+If the answer cannot be found in the context, respond with:
+"I cannot find the answer in the provided documentation."
 
 Context:
 ${context}
 
 Question:
 ${question}
+
+Answer:
 `
 
-    return this.llmService.generateAnswer(prompt)
-  }
+    const answer = await this.llmService.generateAnswer(prompt)
 
+    return {
+      answer,
+      sources: chunks.slice(0, 3)
+    }
+  }
 }

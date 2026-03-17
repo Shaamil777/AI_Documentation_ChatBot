@@ -17,14 +17,15 @@ export class VectorService{
             embeddingFunction:null
         })
     }
-    async storeEmbeddings(id:string,embeddings:number[],text:string){
+    async storeEmbeddings(id:string,embeddings:number[],text:string,metadata:any){
         await this.collection.add({
             ids:[id],
             embeddings:[embeddings],
-            documents:[text]
+            documents:[text],
+            metadatas:[metadata]
         })
     }
-    async searchSimiliar(embeddings:number[],topK:number=5){
+    async searchSimiliar(embeddings:number[],topK:number=3){
         const results = await this.collection.query({
             queryEmbeddings:[embeddings],
             nResults:topK

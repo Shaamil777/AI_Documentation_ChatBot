@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  /* Design System Colors - Dark Theme */
+  --background: hsl(220, 17%, 10%);      /* #161a22 - deep dark blue-black */
+  --foreground: hsl(0, 0%, 96%);         /* #f5f5f5 */
+  --card: hsl(220, 15%, 13%);            /* #1c2028 */
+  --popover: hsl(220, 15%, 15%);         /* #21262e */
+  --primary: hsl(217, 92%, 62%);         /* #4d8ef7 - bright blue */
+  --primary-hover: hsl(217, 92%, 55%);   /* slightly darker blue for hover */
+  --secondary: hsl(220, 14%, 18%);       /* #272c35 */
+  --muted: hsl(220, 14%, 16%);           /* #232830 */
+  --muted-foreground: hsl(220, 8%, 50%); /* #787e87 */
+  --accent: hsl(45, 90%, 55%);           /* #e8b517 */
+  --accent-foreground: hsl(0, 0%, 5%);   /* #0d0d0d */
+  --destructive: hsl(0, 72%, 51%);       /* #dc2626 */
+  --border: hsl(220, 14%, 18%);          /* #272c35 */
+  --input: hsl(220, 14%, 18%);           /* #272c35 */
+  --ring: hsl(217, 92%, 62%);            /* #4d8ef7 */
+  --sidebar-bg: hsl(220, 20%, 8%);       /* #111520 - darker sidebar */
+  --sidebar-foreground: hsl(220, 10%, 75%); /* #b5b9c0 */
+  --chat-user: hsl(217, 92%, 62%);       /* #4d8ef7 */
+  --chat-ai: hsl(220, 15%, 15%);         /* #21262e */
+  --source-bg: hsl(220, 15%, 13%);       /* #1c2028 */
+  --source-border: hsl(220, 14%, 22%);   /* #30353e */
+  --navbar-bg: hsl(220, 18%, 11%);       /* #171b24 */
+  --glow-primary: hsla(217, 92%, 62%, 0.15);
+  --glow-primary-strong: hsla(217, 92%, 62%, 0.25);
+}
+
+/* Light Theme Override */
+[data-theme="light"] {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 4%);
+  --card: hsl(0, 0%, 98%);
+  --popover: hsl(0, 0%, 100%);
+  --primary: hsl(217, 92%, 62%);
+  --primary-hover: hsl(217, 92%, 55%);
+  --secondary: hsl(0, 0%, 96%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --accent: hsl(45, 90%, 55%);
+  --accent-foreground: hsl(0, 0%, 5%);
+  --destructive: hsl(0, 72%, 51%);
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 90%);
+  --ring: hsl(217, 92%, 62%);
+  --sidebar-bg: hsl(0, 0%, 98%);
+  --sidebar-foreground: hsl(0, 0%, 20%);
+  --chat-user: hsl(217, 92%, 62%);
+  --chat-ai: hsl(0, 0%, 96%);
+  --source-bg: hsl(0, 0%, 98%);
+  --source-border: hsl(0, 0%, 85%);
+  --navbar-bg: hsl(0, 0%, 98%);
+  --glow-primary: hsla(217, 92%, 62%, 0.08);
+  --glow-primary-strong: hsla(217, 92%, 62%, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-popover: var(--popover);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-chat-user: var(--chat-user);
+  --color-chat-ai: var(--chat-ai);
+  --color-source-bg: var(--source-bg);
+  --color-source-border: var(--source-border);
+  --color-navbar-bg: var(--navbar-bg);
+  --color-glow-primary: var(--glow-primary);
+  --color-glow-primary-strong: var(--glow-primary-strong);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Smooth scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 8px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* Utility classes */
+.bg-background { background-color: var(--background); }
+.bg-foreground { background-color: var(--foreground); }
+.bg-card { background-color: var(--card); }
+.bg-popover { background-color: var(--popover); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-muted { background-color: var(--muted); }
+.bg-accent { background-color: var(--accent); }
+.bg-destructive { background-color: var(--destructive); }
+.bg-sidebar { background-color: var(--sidebar-bg); }
+.bg-chat-user { background-color: var(--chat-user); }
+.bg-chat-ai { background-color: var(--chat-ai); }
+.bg-source { background-color: var(--source-bg); }
+
+.text-foreground { color: var(--foreground); }
+.text-muted-foreground { color: var(--muted-foreground); }
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-accent-foreground { color: var(--accent-foreground); }
+.text-destructive { color: var(--destructive); }
+.text-sidebar-foreground { color: var(--sidebar-foreground); }
+
+.border-border { border-color: var(--border); }
+.border-input { border-color: var(--input); }
+.border-source { border-color: var(--source-border); }
+
+.ring-ring { --tw-ring-color: var(--ring); }
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--glow-primary);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px var(--glow-primary);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

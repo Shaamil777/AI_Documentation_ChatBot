@@ -23,11 +23,8 @@ export class DocumentParser {
   }
 
   private async parsePDF(buffer: Buffer): Promise<string> {
-
     const parser = new PDFParse({ data: buffer })
-
     const data = await parser.getText()
-
     return data.text
   }
 

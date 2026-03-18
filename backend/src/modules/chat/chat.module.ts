@@ -4,7 +4,7 @@ import { RagModule } from '../rag/rag.module'
 import { LlmModule } from '../../infrastructure/llm/llm.module'
 
 @Module({
-  imports: [RagModule,LlmModule],   // ← IMPORTANT  
+  imports: [RagModule,LlmModule],
   controllers: [ChatController]
 })
 export class ChatModule {}

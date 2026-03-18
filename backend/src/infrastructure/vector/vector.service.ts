@@ -1,21 +1,28 @@
-import { Injectable,OnModuleInit } from "@nestjs/common";
+import { Injectable, OnModuleInit } from "@nestjs/common";
 import { ChromaClient } from "chromadb";
 
-@Injectable()
-export class VectorService{
-    private client:ChromaClient
-    private collection:any
-
-    constructor(){
-        this.client = new ChromaClient({
-            path:"http://localhost:8000"
-        })
+class NoOpEmbeddingFunction {
+    async generate(_texts: string[]): Promise<number[][]> {
+        throw new Error("Embeddings must be provided explicitly.");
     }
-    async onModuleInit(){
+}
+
+@Injectable()
+export class VectorService implements OnModuleInit {
+    private client: ChromaClient;
+    private collection: any;
+
+    constructor() {
+        this.client = new ChromaClient({
+            path: "http://localhost:8000"
+        });
+    }
+
+    async onModuleInit() {
         this.collection = await this.client.getOrCreateCollection({
-            name:"documents",
-            embeddingFunction:null
-        })
+            name: "documents",
+            embeddingFunction: new NoOpEmbeddingFunction()
+        });
     }
     async storeEmbeddings(id:string,embeddings:number[],text:string,metadata:any){
         await this.collection.add({
@@ -37,15 +44,16 @@ export class VectorService{
         console.log(results)
         return results
     }
-   async clear() {
-    await this.client.deleteCollection({
-        name: "documents"
-    })
+    async clear() {
+        await this.client.deleteCollection({
+            name: "documents"
+        });
 
-    this.collection = await this.client.getOrCreateCollection({
-        name: "documents"
-    })
+        this.collection = await this.client.getOrCreateCollection({
+            name: "documents",
+            embeddingFunction: new NoOpEmbeddingFunction()
+        });
 
-    return "Collection reset"
+        return "Collection reset";
     }
 }

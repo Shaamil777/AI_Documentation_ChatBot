@@ -14,7 +14,6 @@ export class RagService {
 
     const chunks = await this.retrievalService.retrieveRelevantDocuments(question)
 
-    // handle no results
     if (!chunks || chunks.length === 0) {
       return {
         answer: "I could not find relevant information in the uploaded documents.",
